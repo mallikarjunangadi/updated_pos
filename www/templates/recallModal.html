@@ -1,0 +1,40 @@
+<ion-modal-view id="recallModal">
+
+ <ion-header-bar align-title="center" class="bar bar-header bar-dark">
+  <h1 class="title">Transaction Details</h1>
+  <div class="button-right" style="position:absolute;right:1vh;">
+   <button class="button button-clear" ng-click="closeRecallModal()"><i class="icon ion-close-circled"></i></button> 
+  </div>
+ </ion-header-bar>
+
+ <ion-tabs class="recallTabs">
+  
+   <ion-tab title="Transactions">
+    <ion-view>
+     <ion-content>
+      <ion-list>
+       <ion-item ng-repeat="(key, value) in transactionObj" ng-click="">
+        <span ng-if="key != 'lastRecieptId'">{{key}}</span>
+        <span style="float:right;">{{value.date}}</span>
+       </ion-item>
+      </ion-list>  
+     </ion-content>
+    </ion-view>
+   </ion-tab>
+
+   <ion-tab title="Hold Items">
+    <ion-view>
+     <ion-content class="card" style="margin-top:1vh;">
+      <ion-list>
+       <ion-item ng-repeat="(key, value) in holdItemObj" ng-click="unHold(key, value)">
+        <span>{{key}} </span>
+        <span style="float:right;">{{value.date}}</span>
+       </ion-item>
+      </ion-list> 
+     </ion-content>
+    </ion-view>
+   </ion-tab>
+   
+  </ion-tabs> 
+
+</ion-modal-view>

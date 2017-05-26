@@ -1,0 +1,66 @@
+
+<ion-view hide-nav-bar='true' cache-view="false">
+ 
+<ion-content style="text-align:center;" ng-controller="billwiseReportCtrl" >
+ <div>
+        <h2 style="text-align:center;"> Bill Wise Report </h2>
+    </div>
+<label class="item item-input">
+  <span class="input-label" style="font-style:italic;font-size: 3vh;font-weight: bold;">Start</span>
+  <input type="date" ng-model="Dte.start">
+</label>
+<label class="item item-input">
+  <span class="input-label" style="font-style:italic;font-size: 3vh;font-weight: bold;">End</span>
+  <input type="date" ng-model="Dte.end">
+</label>
+
+
+<button style="width:25vh;margin-right:2vh;" class='button button-dark' ng-click="save()">Get Report</button>
+<button style="width:25vh;" class='button button-dark' ng-click="closeView()"> Close </button>
+
+<!--<button ion-button ng-click=save()>Get Report</button>-->
+<div ng-if="showreport==true">
+<!--<button ion-button ng-click=saveReport()>Save Report</button>-->
+<button style="width:25vh;margin:auto;" class='button button-dark' ng-click="saveReport()">Save Report</button>
+<div class="card">
+  <p><span class="salesReport" >Average Bill Amount:</span>{{totalAmount.avgBillAmount}}</p>
+  <p><span class="salesReport" >Total Tax Amount:</span>{{totalAmount.taxAmount}}</p>
+  <p><span class="salesReport" >Total Bill Amount:</span>{{totalAmount.billAmt}}</p>
+  <p><span class="salesReport" >Total Amount After Tax:</span>{{totalAmount.amountAftertax}}</p>
+</div>
+
+
+<ion-list>
+
+<ion-item >
+<div class="row header" id="salesReportHeader">
+          <div class="col">Date</div>
+          <div class="col">Time</div>
+          <div class="col">Bill Status</div>
+          <div class="col">Bill Number</div>
+          <div class="col">Bill Amount</div>
+          <div class="col">Tax Amount</div>
+          <div class="col">Total Amount</div>
+        </div>
+</ion-item>
+<!--
+<ion-scroll direction="y" id="productsViewSlideBox" style="width:100%;height:90%;" scrollbar-x = false scrollbar-y= false>
+-->
+ <ion-item ng-repeat="sales in salesReport">      
+        <div class="row" >
+          <div class="col">{{sales.date}}</div>
+          <div class="col">{{sales.time}}</div>
+          <div class="col">{{sales.billStatus}}</div>
+          <div class="col">{{sales.billNo}}</div>
+          <div class="col">{{sales.billAmt}}</div>
+          <div class="col">{{sales.taxAmount}}</div>
+          <div class="col">{{sales.amountAftertax}}</div>
+        </div>
+   </ion-item>
+<!--</ion-scroll>-->
+</ion-list>
+
+</div>
+
+</ion-content>
+</ion-view>

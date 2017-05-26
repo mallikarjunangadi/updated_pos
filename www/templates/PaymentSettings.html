@@ -1,0 +1,54 @@
+<ion-view hide-nav-bar='true' cache-view="false">
+<ion-content ng-controller="paymentSettings">
+<div>
+        <h2 style="text-align:center;"> Payment Settings </h2>
+    </div>
+
+
+
+ <div class="item">
+
+ Select Currency:<div id="currency"class="card">
+ <ion-list >
+ <ion-radio class="pySttg" ng-repeat= "Setting in paymentSetting.currency"  ng-value="Setting.id" ng-model="Options.SelCurrency" name="currency">{{Setting.name}} ({{Setting.symbol}})</ion-radio>
+ </ion-list>
+
+
+<!-- <ion-radio class="pySttg"  ng-model="paymentSetting.currency" ng-value="'USD ($)'">USD ($)</ion-radio>
+ <ion-radio class="pySttg"ng-model="paymentSetting.currency" ng-value="'Pound (£)'"> Pound (£)</ion-radio>
+ <ion-radio class="pySttg"ng-model="paymentSetting.currency" ng-value="'Ringgit RM'" >Ringgit RM</ion-radio>
+
+ -->
+ </div>
+ </div>
+
+
+ <div class="item">
+ 
+ Payment Option:<div class="card" id="payment">
+ <ion-list>
+ <ion-checkbox ng-repeat= "options in paymentSetting.paymentOptions" ng-true-value="true" ng-false-value="false" ng-model="options.sel" >{{options.name}}</ion-checkbox>
+ </ion-list>
+ 
+ <!--
+ <ion-checkbox ng-click="click()" ng-model="paymentSetting.paymentOptions[0].PayTM" >PayTM</ion-checkbox>
+ <ion-checkbox ng-click="click()"ng-model="paymentSetting.paymentOptions[0].Cash" >Cash</ion-checkbox>
+ <ion-checkbox ng-click="click()"ng-model="paymentSetting.paymentOptions[0].Visa" >Visa</ion-checkbox>
+ <ion-checkbox ng-model="paymentSetting.paymentOptions[0].Master" >Master</ion-checkbox>
+ <ion-checkbox ng-model="paymentSetting.paymentOptions[0].Amex" >Amex</ion-checkbox>
+-->
+
+</div>
+
+
+ </div>
+ </div>
+ <div style="text-align:center;margin-top:2vh;">
+  <!--<button type="submit" ng-click="savePaymentSettings()" class="button button-block button-dark" style="margin:auto;width:70%">Submit</button>-->
+    <button style="width:25vh;margin-right:2vh;" class='button button-dark' ng-click="savePaymentSettings()">Save </button>
+    <button style="width:25vh;" class='button button-dark' ng-click="closeView()"> Close </button>
+  </div>
+ 
+
+ </ion-content>
+ </ion-view>

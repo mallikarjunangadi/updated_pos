@@ -1,0 +1,74 @@
+<ion-view hide-nav-bar='true' ng-controller="BillDetails" cache-view="false">
+    <ion-content>
+        <div>
+            <h2 style="text-align:center;">Bill Details </h2>
+        </div>
+        <div style="height:5vmin;"></div>
+        <label class="item item-input">
+            <input type="tel" name="BillDetails" id="billdetails" placeHolder="Bill No" maxlength="20" ng-model="BillDetails.BillNo"></input>
+        </label>
+        <div style="text-align:center;margin-top:2vh;">
+          <button style="width:25vh;margin-right:2vh;" class='button button-dark' ng-click="ShowBills(BillDetails.BillNo)">Get Bill Details</button>
+          <button style="width:25vh;" class='button button-dark' ng-click="closeView()">Close </button>
+        </div>
+        <!--<button class="button button-positive"  ng-click="ShowBills(BillDetails.BillNo)">Get Bill Details</button>-->
+        <div ng-if="showTran == true" class="card" style="height:35vmin;position:relative;top:0px;">
+            <table style="width:100%;color:rbga(255,0,0,0.60);font-size:2vmin;font-weight:bold;line-height:4.5vmin;">
+                <tr style="">
+                    <th>
+                        <span>Item Name</span>
+                    </th>
+                    <th style="">
+                        <span>Quantity</span>
+                    </th>
+                    <th>
+                        <span>Amount</span>
+                    </th>
+                </tr>
+            </table>
+            <ion-scroll delegate-handle="scrollSmall" on-scroll="onScroll()" direction="y" class="product-billing-tableScroll">
+                <table id="product-billing-table" style="color:black;width:100%;text-align:center;font-weight:bolder;line-height:6vmin;">
+                    <tr ng-repeat="product in productArr">
+                        <!--<td ng-show="showDelete" ng-click="deleteItem($index)">
+                                        <button class="button button-assertive">Delete</button>
+                                    </td>-->
+                        <td ><span>{{product.name}}
+                                  </span>  </td>
+                        <td ><span>{{product.quantity}}
+                                 </span>   </td>
+                        <td >
+                            <span>{{product.productTotalPrice}}</span>
+                        </td>
+                    </tr>
+                    <!-- <tr ng-hide="newProduct.name==undefined">
+                                    <td style="text-align:left;padding-left:1vw;font-weight:bold;">
+                                        <span align=>{{newProduct.name}}</span>
+                                    </td>
+                                    <td style="text-align:right;padding-right:1vw;font-weight:bold;">
+                                        <span>{{typedCode}}</span>
+                                    </td>
+                                    <td style="text-align:right;padding-right:1vw;font-weight:bold;">
+                                        <span>{{typedCode*newProduct.unitPrice}}</span>
+                                    </td>
+                                </tr>-->
+                </table>
+            </ion-scroll>
+        </div>
+        <div ng-if="showBill == true" class="totalAmountCalculation" style="margin:0.5vmin;">
+            <p style="font-size:2vmin;color:black;line-height:1.5vmin;">Total Bill Amount{{currencySymbol}}:{{totalPrice}}</p>
+            <p style="font-size:2vmin;color:black;line-height:1.5vmin;">Tax{{currencySymbol}}:{{totalTaxAmount}}</p>
+            <p style="font-size:2vmin;color:black;line-height:1.5vmin;">Discount Amount{{currencySymbol}}:{{discountAmount}}</p>
+            <p style="font-size:2vmin;color:black;line-height:1.5vmin;">Paid Amount{{currencySymbol}}: {{totalChargeAmount}}</p>
+            <p style="font-size:2vmin;color:black;line-height:1.5vmin;">Bill Status: {{BillStatus}}</p>
+            
+          <div style="text-align:center;">
+            <button style="width:25vh;" ng-if="reprintBillButtonEnable == 1" class='button button-dark' ng-click="ReprintBill(BillDetails.BillNo)">Reprint Bill </button>
+          </div> 
+          <div style="text-align:center;">
+            <button style="width:25vh;" ng-if="reprintBillButtonEnable == 0" class='button button-dark' ng-click="CancelBill(BillDetails.BillNo)">Cancel Bill</button>
+          </div> 
+            <!--<button ng-if="reprintBillButtonEnable == 1" class="button button-positive"  ng-click="ReprintBill(BillDetails.BillNo)">Reprint Bill</button>
+      <button ng-if="reprintBillButtonEnable == 0" class="button button-positive"  ng-click="CancelBill(BillDetails.BillNo)">Cancel Bill</button>-->
+        </div>
+    </ion-content>
+</ion-view>

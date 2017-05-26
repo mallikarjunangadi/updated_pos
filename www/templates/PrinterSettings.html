@@ -1,0 +1,81 @@
+<ion-view hide-nav-bar="true" cache-view="false">
+    <ion-content ng-controller="printerSettings">
+        <div>
+            <h2 style="text-align:center;">Printer Settings </h2>
+        </div>
+        <form id="prinrSettings" name="myForm">
+            <label class="item item-input">
+                <span class="input-label">Shop Name </span>
+                :<input type="text" name="shopName" id="shopName" class="printerSettingtext" placeholder="enter shop name"  ng-model="printFormatSettings.shopName" limit-char limit="20" required></input>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Address Line1</span>
+                :<input type="text" name="addressLine1" id="addressLine1" class="printerSettingtext" placeholder="enter shop address line 1"  ng-model="printFormatSettings.addressLine1" limit-char limit="20"></input>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Address Line2</span>
+                :<input type="text" name="addressLine2" id="addressLine2" class="printerSettingtext" placeholder="enter shop address line 2" ng-model="printFormatSettings.addressLine2" limit-char limit="20"></input>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Phone No</span>
+                :<input type="tel" name="number1" id="number1" class="printerSettingtext" placeholder="enter phone number" ng-model="printFormatSettings.phNumber" maxlength=13></input>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">TIN Number</span>
+                :<input type="text" name="tinNum" id="tinNum" class="printerSettingtext" placeholder="enter TIN number" ng-model="printFormatSettings.tin" maxlength=13></input>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Greeting</span>
+                :<input type="text" class="printerSettingtext" id="greetings" name="greetings" placeholder="enter greeting message" ng-model="printFormatSettings.greeting" limit-char limit="30"></input>
+            </label>
+            <label class="item item-input">
+
+                <span class="input-label">Starting Bill Number</span>
+                :<input type="tel" name="startBillNm" id="billNumber" class="printerSettingtext" placeholder="enter starting bill number" ng-model="printFormatSettings.strtBillNmbr" maxlength=5 required></input>
+
+            </label>
+            <!-- <label class="item item-input">
+                <span class="input-label">Token Number:</span>
+                <label class="toggle">
+                    <input type="checkbox" ng-model="printFormatSettings.tokNum">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </label>-->
+            <label class="item item-input">
+                <span class="input-label">Token Number </span>
+                <ion-radio style="border-radius:10px;margin-right:1vw;" ng-model="printFormatSettings.tokNum" ng-value="'Disable'">Disable</ion-radio>
+                <ion-radio style="border-radius:10px;margin-right:1vw;" ng-model="printFormatSettings.tokNum" ng-value="'Auto'">Auto</ion-radio>
+                <ion-radio style="border-radius:10px;" ng-model="printFormatSettings.tokNum" ng-value="'Manual'">Manual</ion-radio>
+            </label>
+            <div ng-show="printFormatSettings.tokNum == 'Auto'">
+                <label class="item item-input">
+                    <span class="input-label">Token Start No</span>
+                    :<input type="tel" id="trtTokenNum" name="strtTokenNum" class="printerSettingtext" placeholder="enter token starting number" ng-model="printFormatSettings.tokStartNmbr" maxlength=4 required></input>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Token Reset After</span>
+                    :<input type="tel" id="restTokenNum" name="restTokenNum" class="printerSettingtext" placeholder="enter token reset after" ng-model="printFormatSettings.tokResetAftr" maxlength=4></input>
+                </label>
+            </div>
+            <label class="item item-input">
+                <span class="input-label">Bill Copies</span>
+                :<input type="tel" id="billCopies" name="billCopies" class="printerSettingtext" placeholder="enter number of bill copies to print" ng-model="printFormatSettings.billCopies" maxlength=1 required></input>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Wifi Password</span>
+                :<input type="text" id="wifiPassword" name="wifiPassword" class="printerSettingtext" placeholder="enter wifi password" ng-model="printFormatSettings.wifiPasswrd" limit-char limit="15"></input>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Wifi SSID</span>
+                :<input type="text" id="wifiSsid" name="wifiSsid" class="printerSettingtext" placeholder="enter wifi ssid" ng-model="printFormatSettings.wifiSsid" limit-char limit="15"></input>
+            </label>
+            <div style="text-align:center;margin-top:2vh;">
+                <!--<button type="submit"  class="button button-block button-dark" style="margin:auto;width:70%">Submit</button>-->
+                <button style="width:25vh;margin-right:2vh;" class='button button-dark' ng-click="savePrinterSettings()">Save </button>
+                <button style="width:25vh;" class='button button-dark' ng-click="closeView()">Close </button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

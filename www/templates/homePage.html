@@ -1,0 +1,539 @@
+<!--<ion-view view-title="PayUPad" class="has-footer">-->
+<ion-view ng-controller="MyCtrl" hide-nav-bar="true">
+    <ion-content ng-controller="homeCtrl" scroll="false">
+        <div class="row backgroundProduct" id="product">
+            <div id="product-billing" class='backgroundPOS row'>
+                <div class="row" id="product-billing-head" style="height:6vmin;color:white;">
+                    <i style="font-size:5vmin;text-align:right;" ng-click="void()" class="icon ion-ios-trash-outline col-10 "></i>
+                    <div class="col-80" style="text-align:center;transform: translateY(-50%);line-height:9vmin; font-size:2.5vmin;font-weight:bold; ">Admire POS</div>
+                    <i style="font-size:5vmin;text-align-left;" class="icon ion-loop col-10" ng-click="holdItems()"></i>
+                </div>
+                <div id="product-billing-col1">
+                    <!--  <button ng-show="scrollTopBtn" ng-click="scrollTop()" style="opacity:0.4;position:fixed;z-index:2;left:20%;top:30%;border-radius:50%;width:5vh;height:5vh;">
+                        <i style="font-size:3vh;" class="icon ion-chevron-up"></i>
+                    </button>
+                    <button ng-show="scrollBottomBtn" ng-click="scrollBottom()" style="opacity:0.4;position:fixed;z-index:2;left:20%;top:58%;border-radius:50%;width:5vh;height:5vh;">
+                        <i style="font-size:3vh;" class="icon ion-chevron-down"></i>
+                    </button>
+
+                    -->
+                    <div style="position:relative;top:0px;">
+                        <table class="billList" style="width:100%;font-size:2vmin;font-weight:bold;line-height:4.5vmin;">
+                            <tr>
+                                <p ng-show="tableNumberSelected != -1" style="font-weight:bold;font-size:2.2vmin;text-align:center!important;">Table: {{tableNumberSelected}} </p>
+                            </tr>
+                            <thead>
+                                <tr>
+                                    <th>SNo.
+                                </th>
+                                    <th style="text-align:left;">Item 
+                                </th>
+                                    <th style="text-align:right;">Qty
+                                </th>
+                                    <th style="text-align:right;">Amount
+                                </th>
+                                </tr>
+                            </thead>
+                            <tr ng-repeat="product in productArr" on-hold="onPressHold($index,product)">
+                                <td style="font-weight:bold;position:relative;">
+                                    {{$index+1}}
+                                    
+                                    
+                                    
+                                    
+                                    <i ng-if="product.status==true" style="position:absolute;left:6px;top:0px;font-size:6vmin;color:green;" class="icon ion-ios-checkmark-empty"></i>
+                                    <i ng-if="$index==holdIndex" style="position:absolute;left:3px;;font-size:3.5vmin;color:red;" ng-show="showDelete" class="icon ion-minus-circled"></i>
+                                </td>
+                                <td style="font-weight:bold;">{{product.name}}
+                                    </td>
+                                <td style="text-align:right;padding-right:1vw;font-weight:bold;">{{product.quantity}}
+                                    </td>
+                                <td style="text-align:right;padding-right:1vw;font-weight:bold;">
+                                    <span>{{product.productTotalPrice}}</span>
+                                </td>
+                            </tr>
+                            <tr ng-hide="newProduct.name==undefined">
+                                <td style="text-align:left;padding-left:1vw;font-weight:bold;">
+                                    <span align=>{{newProduct.name}}</span>
+                                </td>
+                                <td style="text-align:right;padding-right:1vw;font-weight:bold;">
+                                    <span>{{typedCode}}</span>
+                                </td>
+                                <td style="text-align:right;padding-right:1vw;font-weight:bold;">
+                                    <span>{{typedCode*newProduct.unitPrice}}</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="totalAmountCalculation" style="padding-top:1vmin;">
+                        <button ng-show="showPlaceButton ==true" style="border-radius:1%;width:100%;height-max:2vmin;line-height:6vmin;font-size:2vmin;" ng-click="placeOrder()" class="button  button-assertive">Place Order</button>
+                        <button style="border-radius:1%;width:100%;height-max:2vmin;line-height:6vmin;font-size:2vmin;" ng-click="showPaymentMode()" class="button  button-balanced">check out {{totalChargeAmount}}({{PaymentSettings.CurrencyOptions.symbol}})</button>
+                        <p></p>
+                        <p>Bill No: {{VolatileData.CurrentBillNo}}</p>
+                        <p>Total Bill Amount{{currencySymbol}}:{{totalPrice}}</p>
+                        <p>Tax{{currencySymbol}}:{{totalTaxAmount}}</p>
+                        <p>Discount Amount{{currencySymbol}}:{{discountAmount}}</p>
+                        <!--   <p>Paid Amount{{currencySymbol}}: {{typedAmount}}</p>
+                        <p ng-if="typedAmount>0">Balance{{currencySymbol}}: {{Balance}}</p>
+                        <p>{{totalChargeAmount}}({{PaymentSettings.CurrencyOptions.symbol}})</p>  -->
+                        <p ng-click="addTotalDiscount()">Total Amount Discount ({{discType}}): {{totalAmountDiscount}}</p>
+                        <div style="line-height:1vmin;"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- 
+                <div class="col-70" id="product-display">
+                    <div id="product-display-col1" class="card" ng-click="openNumericModal(Product)" ng-repeat="Product in Products">
+                        <div id="product-name" align="left">
+                            <p style="font-weight:bolder;text-transform: uppercase;padding:2vh;margin:auto;position:absolute;font-size:small;">{{Product.name}}</p>
+                        </div>
+                        <div id="product-image" align="right">
+                            <img ng-src={{Product.image}} style="padding:auto;margin:auto;height:100%;width:100%;"></img>
+                            <div id="product-stock"></div>
+                            <div id="product-price">
+                                <p style="font-weight:bolder;color:lightblue;">{{Product.unitPrice}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+      -->
+            <!--<button class="product-categary-button" ng-show = "Mode == 1" ng-click="AddNewCat()">Add New</button>
+                        <button  class="product-categary-button"  ng-repeat="categoryObj in categoryArr" ng-style="highlight==categoryObj.categoryId ? {background:'Red'} : {background:'Black'}" ng-click="OnCatClick(categoryObj.categoryId)">{{categoryObj.categoryName}}</button>
+                        -->
+            <div id="productsView">
+                <table class="productlist">
+                    <tr ng-show='Mode == true'>
+                        <td style="background:transparent;">
+                            <div style="min-width:20%;height:20%;margin:1vh;" ng-click="AddNewPro()">
+                                <img ng-src="img/add-product.png" style="width:100%;"></img>
+                                <p style="text-align:center;">Add New Product</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="Product in Products" ng-if="$index%3==0" style="background:transparent;">
+                        <td style="background:transparent;">
+                            <div ng-class="{jiggle: Mode}" style="position:relative;">
+                                <div ng-show='Mode==true' class="icon-right ion-close-circled proDelete" ng-Click="deleteProduct(Products[$index].productId)"></div>
+                                <div style="width:15vw;max-height:24vh;" on-hold="productHold(); $event.stopPropagation()" ng-click="OnProductClick(Products[$index])">
+                                    <div class="product-image">
+                                        <img ng-src={{Products[$index].image}} style="width:100%;height:100%;overflow:hidden;"></img>
+                                        <div id="product-stock">
+                                            <div id="product-stock-text">Stock: {{Products[$index].inStock}} </div>
+                                        </div>
+                                        <div id="product-price">
+                                            <a style="font-weight:bold;color:lightblue;">{{PaymentSettings.CurrencyOptions.symbol}}{{Products[$index].unitPrice}}</a>
+                                        </div>
+                                        <div id="product-name">
+                                            <p>{{Products[$index].name}}</p>
+                                            <div ng-show='Mode==true' class="icon-left ion-edit proEdit" ng-Click="OnProductClick(Products[$index])"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-class="{jiggle: Mode}" ng-if="Products[$index+1]!=undefined" style="position:relative;height:inherit;">
+                                <div ng-show='Mode==true' class="icon-right ion-close-circled proDelete" ng-Click="deleteProduct(Products[$index+1].productId)"></div>
+                                <div style="width:15vw;max-height:25vh;" on-hold="productHold(); $event.stopPropagation()" ng-click="OnProductClick(Products[$index+1])">
+                                    <div class="product-image">
+                                        <img ng-src={{Products[$index+1].image}} style="width:100%; height:100%;overflow:hidden;"></img>
+                                        <div id="product-stock">
+                                            <div id="product-stock-text">Stock: {{Products[$index+1].inStock}} </div>
+                                        </div>
+                                        <div id="product-price">
+                                            <a style="font-weight:bold;color:lightblue;">{{PaymentSettings.CurrencyOptions.symbol}}{{Products[$index+1].unitPrice}}</a>
+                                        </div>
+                                        <div id="product-name">
+                                            <p>{{Products[$index+1].name}}</p>
+                                            <div ng-show='Mode==true' class="icon-left ion-edit proEdit" ng-Click="OnProductClick(Products[$index+1])"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-class="{jiggle: Mode}" ng-if="Products[$index+2]!=undefined" style="position:relative;">
+                                <div ng-show='Mode==true' class="icon-right ion-close-circled proDelete" ng-Click="deleteProduct(Products[$index+2].productId)"></div>
+                                <div style="width:15vw;max-height:25vh;" on-hold="productHold(); $event.stopPropagation()" ng-click="OnProductClick(Products[$index+2])">
+                                    <div class="product-image">
+                                        <img ng-src={{Products[$index+2].image}} style="width:100%; height:100%"></img>
+                                        <div id="product-stock">
+                                            <div id="product-stock-text">Stock: {{Products[$index+2].inStock}} </div>
+                                        </div>
+                                        <div id="product-price">
+                                            <a style="font-weight:bold;color:lightblue;">{{PaymentSettings.CurrencyOptions.symbol}}{{Products[$index+2].unitPrice}}</a>
+                                        </div>
+                                        <div id="product-name">
+                                            <p>{{Products[$index+2].name}}</p>
+                                            <div ng-show='Mode==true' class="icon-left ion-edit proEdit" ng-Click="OnProductClick(Products[$index+2])"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <!--</div>-->
+                <!--
+            <div id="productsView">
+                <ion-scroll direction="y" id="productsViewSlideBox" style="width:100%;height:90%;" scrollbar-x=false scrollbar-y=false>
+                    <div style="width:94%;">
+                        <div ng-show="Mode == 1" style="width:20%;height:20%;margin:1vh;" ng-click="AddNewPro()">
+                            <div class="row">
+                                <div style="position:relative;" class="col col-30 col-center">
+                                    <div style="width:15vw;max-height:25vh;">
+                                        <div id="product-image" style="width:100%; height:100%" align="right">
+                                            <img ng-src="img/add-product.png" style="padding:auto;margin:auto;height:100%;width:100%;"></img>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-repeat="Product in Products">
+                            <div class="row" ng-if="$index%3==0">
+                                <div ng-class="{jiggle: Mode}" style="position:relative;" class="col col-30 col-center">
+                                    <div ng-show='Mode==true' style="position:absolute;z-index:1;font-size:7vmin;height:7vmin;width:5vmin;color:red;top:-10px;right:-4px;" class="icon-right ion-close-circled" ng-Click = "deleteProduct(Product.productId)"></div>
+                                    <div ng-show='Mode==true' style="position:absolute;z-index:1;font-size:4vmin;line-height:7vmin;text-align:center;height:7vmin;width:7vmin;color:white;bottom:-10px;left:-4px;background:blue;border-radius:10px;" class="icon-left ion-edit" ng-Click = "OnProductClick(Product)"></div>
+                                    <div style="width:15vw;max-height:25vh;" on-hold="productHold(); $event.stopPropagation()" ng-click="OnProductClick(Product)">
+                                        <div class="product-image">
+                                            <img ng-src={{Product.image}} style="width:100%; height:100%"></img>
+                                            <div id="product-stock">
+                                                <div id="product-stock-text">Stock: {{Product.inStock}} </div>
+                                            </div>
+                                            <div id="product-price">
+                                                <a style="font-weight:bold;color:lightblue;">{{PaymentSettings.CurrencyOptions.symbol}}{{Product.unitPrice}}</a>
+                                            </div>
+                                            <div id="product-name">
+                                                <p>{{Product.name}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="position:relative;" class="col col-30 col-center">
+                                    <div ng-class="{jiggle: Mode}" ng-if="Products[$index+1]!=undefined" style="width:15vw;max-height:25vh;" on-hold="productHold(); $event.stopPropagation()" ng-click="OnProductClick(Products[$index+1])">
+                                        <div ng-show='Mode==true' style="position:absolute;z-index:1;font-size:7vmin;height:7vmin;width:5vmin;color:red;top:-10px;right:-4px;" class="icon-right ion-close-circled" ng-Click = "deleteProduct(Products[$index+1].productId)"></div>
+                                        <div ng-show='Mode==true' style="position:absolute;z-index:1;font-size:4vmin;line-height:7vmin;text-align:center;height:7vmin;width:7vmin;color:white;bottom:-10px;left:-4px;background:blue;border-radius:10px;" class="icon-left ion-edit" ng-click="OnProductClick(Products[$index+1])"></div>
+                                        <div class="product-image">
+                                            <img ng-src={{Products[$index+1].image}} style="width:100%; height:100%"></img>
+                                            <div id="product-stock">
+                                                <div id="product-stock-text">Stock: {{Products[$index+1].inStock}} </div>
+                                            </div>
+                                            <div id="product-price">
+                                                <a style="font-weight:bold;color:lightblue;">{{PaymentSettings.CurrencyOptions.symbol}}{{Products[$index+1].unitPrice}}</a>
+                                            </div>
+                                            <div id="product-name">
+                                                <p>{{Products[$index+1].name}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="position:relative;" class="col col-30 col-center">
+                                    <div ng-class="{jiggle: Mode}" ng-if="Products[$index+2]!=undefined" style="width:15vw;max-height:25vh;" on-hold="productHold(); $event.stopPropagation()" ng-click="OnProductClick(Products[$index+2])">
+                                        <div ng-show='Mode==true' style="position:absolute;z-index:1;font-size:7vmin;height:7vmin;width:5vmin;color:red;top:-10px;right:-4px;" class="icon-right ion-close-circled" ng-Click = "deleteProduct(Products[$index+2].productId)"></div>
+                                        <div ng-show='Mode==true' style="position:absolute;z-index:1;font-size:4vmin;line-height:7vmin;text-align:center;height:7vmin;width:7vmin;color:white;bottom:-10px;left:-4px;background:blue;border-radius:10px;" class="icon-left ion-edit" ng-click= "OnProductClick(Products[$index+2])"></div>
+                                        <div class="product-image">
+                                            <img ng-src={{Products[$index+2].image}} style="width:100%; height:100%"></img>
+                                            <div id="product-stock">
+                                                <div id="product-stock-text">Stock: {{Products[$index+2].inStock}} </div>
+                                            </div>
+                                            <div id="product-price">
+                                                <a style="font-weight:bold;color:lightblue;">{{PaymentSettings.CurrencyOptions.symbol}}{{Products[$index+2].unitPrice}}</a>
+                                            </div>
+                                            <div id="product-name">
+                                                <p>{{Products[$index+2].name}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ion-scroll>
+
+                -->
+                <!--<ion-slide-box show-pager="true" style="width:100%;height:90%;" id="productsViewSlideBox" >
+                 -->
+                <!--<ion-slide style="display:flex;width:100%;height:100%;flex-wrap:wrap;flex-direction:row;" ng-repeat="proArr in allSlideProductArr">
+                        -->
+                <!--<div class="card" ng-show = "Mode == 1" style="width:20%;height:20%;margin:1vh;border:1px solid black;" ng-click="AddNewPro()">
+                            
+                          
+
+                            <div id="product-image" align="right">
+                                <img ng-src="img/add-product.png" style="padding:auto;margin:auto;height:100%;width:100%;"></img>
+                            </div>
+
+                        </div>-->
+                <!-- <div class="card" style="width:20%;height:20%;margin:1vh;border:1px solid black;" ng-click="openNumericModal(Product)" ng-repeat="Product in proArr">
+                            <div id="product-name" align="left">
+                                <p style="font-weight:bolder;text-transform: uppercase;padding:2vh;margin:auto;position:absolute;font-size:small;">{{Product.name}}</p>
+                            </div>
+
+                            <div id="product-image" align="right">
+                                <img ng-src={{Product.image}} style="padding:auto;margin:auto;height:100%;width:100%;"></img>
+                                <div id="product-stock">{{Product.inStock}}</div>
+                                <div id="product-price">
+                                    <p style="font-weight:bolder;color:lightblue;">{{Product.unitPrice}}</p>
+                                </div>
+                            </div>
+                        </div>-->
+                <!--</ion-slide>-->
+                <!--</ion-slide-box>-->
+                <div id="product-categary">
+                    <ion-scroll direction="x" class="product-categary-scroll" scrollbar-x=false scrollbar-y=false style="padding-top:3vh;">
+                        <button class="product-categary-button" ng-show="Mode == 1" ng-click="AddNewCat()">Create Category</button>
+                        <span ng-repeat="categoryObj in categoryArr">
+                            <div style="display:inline-block; width:16vw;margin:0 0.5vw;position:relative;" ng-class="categoryObj.categoryId != 'favourite' ? {jiggle: Mode} : ''">
+                                <div ng-show='Mode==true && categoryObj.categoryId != "favourite"' style="position:absolute;z-index:1;font-size:7vmin;height:6.2vmin;width:6.2vmin;color:white;background:red;border-radius:50%;right:-8px;top:-11px;line-height:7vmin;text-align:center;" class="icon-right ion-ios-close-empty" ng-Click="deleteAllProductsAndCat(categoryObj.categoryId)"></div>
+                                <div ng-show='Mode==true  && categoryObj.categoryId != "favourite"' style="position:absolute;z-index:1;font-size:4vmin;height:6vmin;width:6vmin;color:white;background:blue;border-radius:10px;float:left;left:-4px;top:-11px;line-height:7vmin;text-align:center;" class="icon-left ion-edit" ng-Click="OnEditCategory(categoryObj.categoryId)"></div>
+                                <button class="product-categary-button" ng-style="highlight==categoryObj.categoryId ? {background:'Red'} : {background:'Black'}" ng-click="OnCatClick(categoryObj.categoryId)">{{categoryObj.categoryName}}</button>
+                            </div>
+                        </span>
+                    </ion-scroll>
+                </div>
+            </div>
+        </div>
+        <!--  
+        <div class="bar bar-footer bar-light " id="footer">
+            <button class="button" id="button1" ng-click="cancel(productArr,product)">CANCEL</button>
+            <button class="button" id="button1" ng-click="void()">VOID</button>
+            <button class="button" id="button1" ng-click="holdItems()">HOLD</button>
+        </div>
+      -->
+    </ion-content>
+    <!--<ion-floating-button ng-show="Mode == 1" click="OnEditCategory()" has-footer="false" button-color="#2AC9AA" icon="ion-edit" icon-color="#fff"></ion-floating-button>
+    -->
+    <ion-side-tabs on-expand="tabExpand(index);rest()" on-collapse="tabCollapse(index);resetSearch()" has-header='false'>
+        <!--<ion-side-tab  tab.expand="tabs.tab1" style="border-radius: 10px; width:10vw;background-color:rgba(8,8,8,0.9);" >
+ -->
+        <ion-side-tab positive-bg style="border-radius: 10px;border-radius: 10px; width:10vw;background-color:rgba(8,8,8,0.9);" has-header='false' expand="tabs.tab3">
+            <ion-side-tab-handle width="60" height="100" toggle="ion-chevron-right ion-ios-search" class="dark-bg stable" style="border-radius: 40px 0 0 40px; background-color:rgba(8,8,8,0.9);">
+                <i style="font-size:5vmin;" class="icon ion-ios-search"></i>
+            </ion-side-tab-handle>
+            <div class="item" style="background-color:transparent;border:0px;width:100%;height:100%;text-align:center;" ng-controller="searchProductsCtrl">
+                <div class="item item-input-inset" style="padding:0;height:8vmin;">
+                    <label class="item-input-wrapper" style="margin:0;padding:0;background-color:transparent;">
+                        <i style="font-size:6vmin;margin:4px;" class="icon ion-ios-search placeholder-icon "></i>
+                        <input type="search" style="width:100%;font-size:4vmin;padding:0;margin:0;" placeholder="Search" ng-change="searchChange() " ng-model="searchObj.pattern">
+                    </label>
+                    <button class="button button-clear" ng-click="resetSearch()" style="padding:0;margin:0;">
+                        <i style="font-size:6vmin;padding:0;margin:0;" class="ion-android-cancel assertive"></i>
+                    </button>
+                </div>
+                <ion-scroll direction="y" scrollbar-x=false scrollbar-y=false style="margin-top:2vh;height:90vh;">
+                    <ion-list>
+                        <ion-item style="height:8vmin;padding:0;text-align:center;" ng-repeat="x in searchedResults" ng-click="toggleTab('tab3');onClickSearchProduct(x)">
+                            <img src="{{x.image}}" style="height:8vmin;width:auto;float:left;"></img>
+                            <div style="font-size:4vmin;width:auto;height:100%;padding-top:2vmin;">
+                                <span style="float:right;margin:0vws 2vw;height:100%;width:30%;">Price: {{x.unitPrice}}</span>
+                                <span style="float:left;text-align:right;margin:0vw 2vw;height:100%;width:auto;">{{x.name}}</span>
+                            </div>
+                        </ion-item>
+                        <!--    <ion-item ng-if="searchedResults !== undefined && !searchedResults.length">No Results Found..</ion-item>  -->
+                    </ion-list>
+                </ion-scroll>
+            </div>
+        </ion-side-tab>
+        <ion-side-tab positive-bg style="border-radius: 10px;border-radius: 10px; width:10vw;background-color:rgba(8,8,8,0.9);" has-header='false' expand="tabs.tab1">
+            <ion-side-tab-handle width="60" height="100" toggle="ion-chevron-right ion-ios-gear-outline" class="dark-bg stable" style="border-radius: 40px 0 0 40px; background-color:rgba(8,8,8,0.9);">
+                <i style="font-size:5vmin;" class="icon ion-ios-gear-outline"></i>
+            </ion-side-tab-handle>
+            <div class="item" style="background-color:transparent;border:0px;width:60%;text-align:center;">
+                <div>
+                    <ion-toggle ng-disabled="disableEnableAdmin" style="background-color:transparent;border:0px;color:white;" ng-model="$root.Mode" toggle-class="toggle-calm" ng-change="ShowPopUpPassword()">Enable Administrative rights to Add, Remove Products </ion-toggle>
+                </div>
+            </div>
+            <div style="position:relative;top:2vmin" ng-controller="MenuCtrl">
+                <div>
+                    <div ng-repeat="items in rightItems">
+                        <div class="row" ng-if="$index%3==0">
+                            <div style="position:relative;" class="col col-33 col-center">
+                                <a class="element" ng-if="rightItems[$index]!=undefined" ng-click="itemclick(rightItems[$index])" menu-close>
+                                    <button style="box-shadow:2px 2px 4px rgba(0, 0, 0, 0.4);" class="button-circle" animate-ratio="fadeIn">
+                                        <i class="{{rightItems[$index].icon}}" style="font-size:7vmin"></i>
+                                    </button>
+                                    <div style="text-shadow:3px 3px 4px rgba(0, 0, 0, 0.8);" class="icon_text">{{rightItems[$index].name}} </div>
+                                </a>
+                            </div>
+                            <div style="position:relative;" class="col col-30 col-center">
+                                <a class="element" ng-if="rightItems[$index+1]!=undefined" ng-click="itemclick(rightItems[$index+1])" menu-close>
+                                    <button style="box-shadow:2px 2px 4px rgba(0, 0, 0, 0.4);" class="button-circle" animate-ratio="fadeIn">
+                                        <i class="{{rightItems[$index+1].icon}}" style="font-size:7vmin"></i>
+                                    </button>
+                                    <div style="text-shadow:3px 3px 4px rgba(0, 0, 0, 0.8);" class="icon_text">{{rightItems[$index+1].name}} </div>
+                                </a>
+                            </div>
+                            <div style="position:relative;" class="col col-30 col-center">
+                                <a class="element" ng-if="rightItems[$index+2]!=undefined" ng-click="itemclick(rightItems[$index+2])" menu-close>
+                                    <button style="box-shadow:2px 2px 4px rgba(0, 0, 0, 0.4);" class="button-circle" animate-ratio="fadeIn">
+                                        <i class="{{rightItems[$index+2].icon}}" style="font-size:7vmin"></i>
+                                    </button>
+                                    <div style="text-shadow:3px 3px 4px rgba(0, 0, 0, 0.8);" class="icon_text">{{rightItems[$index+2].name}} </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ion-side-tab>
+     
+        <ion-side-tab ng-if="false" class="positive-bg" style="border-radius: 10px;border-radius: 10px; width:10vw;background-color:rgba(8,8,8,0.9);" expand="tabs.tab2">
+            <ion-side-tab-handle width="60" height="100" toggle="ion-chevron-left ion-chevron-right" class="positive-bg" style="border-radius: 40px 0 0 40px; background-color:rgba(8,8,8,0.9);">
+                <i style="font-size:5vmin;color:white;" class="ion-android-contacts"></i>
+            </ion-side-tab-handle>
+            <div class="item" style="background-color:transparent;border:0px;width:60%;text-align:center;">
+                <div>
+                    <ion-toggle ng-disabled="disableEnableTableAdmin" style="background-color:transparent;border:0px;color:white;" ng-model="$root.tableEditMode" toggle-class="toggle-calm" ng-change="ShowTablePopUpPassword()">Enable Administrative rights to Add, Remove Tables </ion-toggle>
+                </div>
+            </div>
+            <div id="tableInfoView" ng-controller="tableInfoCtrl">
+                <table class="tableInfolist" style="width:100%;font-size:2vmin;font-weight:bold;line-height:4.5vmin;">
+                    <tr ng-show='tableEditMode == true'>
+                        <td style="background:transparent;">
+                            <div style="min-width:20%;height:20%;margin:1vh;" ng-click="AddNewTable()">
+                                <img ng-src="img/add-product.png" style="width:100%;"></img>
+                                <p style="text-align:center;color:white;">Add New Table</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="table in tables" ng-if="$index%5==0" style="background:transparent;">
+                        <td style="background:transparent;">
+                            <div ng-class="[{jiggle: tableEditMode}]">
+                                <div ng-class="{tableInfolistDiv:getTableStatus(tables[$index])==false ,tableInfolistDivRunning:getTableStatus(tables[$index])==true}">
+                                    <div ng-show='tableEditMode==true' class="icon-right ion-close-circled tableDelete" ng-Click="deleteTable(tables[$index].tableId)"></div>
+                                    <div ng-show='tableEditMode==true' class="icon-left ion-edit tableEdit" ng-Click="OnTableClick(tables[$index]);"></div>
+                                    <div style="width:15vw;max-height:24vh;" ng-click="toggleTab('tab2');OnTableClick(tables[$index]);">
+                                        <div style="width:100%;height:100%;vertical-align: middle;">
+                                            <div class="tableInfoNumber">
+                                                <p>{{tables[$index].tableNumber}}</p>
+                                            </div>
+                                            <div class="tableInfo-occupancy">
+                                                <!--  <p class="badge" style="background-color:green;color:white;">0</p>  -->
+                                                <!--  <p>{{counter|formatTimer}}</p>  -->
+                                                <p ng-if="tables[$index].seatedTime > 0 " am-time-ago={{tables[$index].seatedTime}}></p>
+                                            </div>
+                                            <div style="width:100%" class="tableInfo-capacity">
+                                                <p class="badge badge-stable">{{tables[$index].tableCapacity}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-class="[{jiggle: tableEditMode}]" ng-if="tables[$index+1]!=undefined">
+                                <div ng-class="{tableInfolistDiv:getTableStatus(tables[$index+1])==false ,tableInfolistDivRunning:getTableStatus(tables[$index+1])==true}">
+                                    <div ng-show='tableEditMode==true' class="icon-right ion-close-circled tableDelete" ng-Click="deleteTable(tables[$index+1].tableId)"></div>
+                                    <div ng-show='tableEditMode==true' class="icon-left ion-edit tableEdit" ng-Click="OnTableClick(tables[$index+1])"></div>
+                                    <div style="width:15vw;max-height:25vh;" ng-click="toggleTab('tab2');OnTableClick(tables[$index+1]);">
+                                        <!--     <img ng-src={{tables[$index+1].image}} class="tableInfo-image"></img> -->
+                                        <div class="tableInfoNumber">
+                                            <p>{{tables[$index+1].tableNumber}} </p>
+                                        </div>
+                                        <div class="tableInfo-occupancy">
+                                            <!-- <p class="badge" style="background-color:green;color:white;">0</p>  -->
+                                            <p ng-if="tables[$index+1].seatedTime > 0 " am-time-ago={{tables[$index+1].seatedTime}}></p>
+                                        </div>
+                                        <!--     <div class="tableInfo-desc">
+                                        <p>{{tables[$index+1].tableDescription}}</p>
+                                    </div>
+                           -->
+                                        <div class="tableInfo-capacity">
+                                            <p class="badge badge-stable">{{tables[$index+1].tableCapacity}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-class="[{jiggle: tableEditMode}]" ng-if="tables[$index+2]!=undefined">
+                                <div ng-class="{tableInfolistDiv:getTableStatus(tables[$index+2])==false ,tableInfolistDivRunning:getTableStatus(tables[$index+2])==true}">
+                                    <div ng-show='tableEditMode==true' class="icon-right ion-close-circled tableDelete" ng-Click="deleteTable(tables[$index+2].tableId)"></div>
+                                    <div ng-show='tableEditMode==true' class="icon-left ion-edit tableEdit" ng-Click="OnTableClick(tables[$index+2])"></div>
+                                    <div style="width:15vw;max-height:25vh;" ng-click="toggleTab('tab2');OnTableClick(tables[$index+2]);">
+                                        <!--    <img ng-src={{tables[$index+2].image}} class="tableInfo-image"></img>  -->
+                                        <div class="tableInfoNumber">
+                                            <p>{{tables[$index+2].tableNumber}} </p>
+                                        </div>
+                                        <div class="tableInfo-occupancy">
+                                            <!--  <p class="badge" style="background-color:green;color:white;">0</p>  -->
+                                            <p ng-if="tables[$index+2].seatedTime > 0 " am-time-ago={{tables[$index+2].seatedTime}}></p>
+                                        </div>
+                                        <div class="tableInfo-capacity">
+                                            <p class="badge badge-stable">{{tables[$index+2].tableCapacity}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-class="[{jiggle: tableEditMode}]" ng-if="tables[$index+3]!=undefined">
+                                <div ng-class="{tableInfolistDiv:getTableStatus(tables[$index+3])==false ,tableInfolistDivRunning:getTableStatus(tables[$index+3])==true}">
+                                    <div ng-show='tableEditMode==true' class="icon-right ion-close-circled tableDelete" ng-Click="deleteTable(tables[$index+3].tableId)"></div>
+                                    <div ng-show='tableEditMode==true' class="icon-left ion-edit tableEdit" ng-Click="OnTableClick(tables[$index+3])"></div>
+                                    <div style="width:15vw;max-height:25vh;" ng-click="toggleTab('tab2');OnTableClick(tables[$index+3]);">
+                                        <!--     <img ng-src={{tables[$index+3].image}} class="tableInfo-image"></img>  -->
+                                        <div class="tableInfoNumber">
+                                            <p>{{tables[$index+3].tableNumber}} </p>
+                                        </div>
+                                        <div class="tableInfo-occupancy">
+                                            <!--  <p class="badge" style="background-color:green;color:white;">0</p>  -->
+                                            <p ng-if="tables[$index+3].seatedTime > 0 " am-time-ago={{tables[$index+3].seatedTime}}></p>
+                                        </div>
+                                        <div class="tableInfo-capacity">
+                                            <p class="badge badge-stable">{{tables[$index+3].tableCapacity}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-class="[{jiggle: tableEditMode}]" ng-if="tables[$index+4]!=undefined">
+                                <div ng-class="{tableInfolistDiv:getTableStatus(tables[$index+4])==false ,tableInfolistDivRunning:getTableStatus(tables[$index+4])==true}">
+                                    <div ng-show='tableEditMode==true' class="icon-right ion-close-circled tableDelete" ng-Click="deleteTable(tables[$index+4].tableId)"></div>
+                                    <div ng-show='tableEditMode==true' class="icon-left ion-edit tableEdit" ng-Click="OnTableClick(tables[$index+4]);"></div>
+                                    <div style="width:15vw;max-height:25vh;" ng-click="toggleTab('tab2');OnTableClick(tables[$index+4]);">
+                                        <!--     <img ng-src={{tables[$index+3].image}} class="tableInfo-image"></img>  -->
+                                        <div class="tableInfoNumber">
+                                            <p>{{tables[$index+4].tableNumber}} </p>
+                                        </div>
+                                        <div class="tableInfo-occupancy">
+                                            <!--  <p class="badge" style="background-color:green;color:white;">0</p>  -->
+                                            <p ng-if="tables[$index+4].seatedTime > 0 " am-time-ago={{tables[$index+4].seatedTime}}></p>
+                                        </div>
+                                        <div class="tableInfo-capacity">
+                                            <p class="badge badge-stable">{{tables[$index+4].tableCapacity}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="tableInfo-section">
+                    <ion-scroll direction="x" class="tableInfo-section-scroll" scrollbar-x=false scrollbar-y=false style="padding-top:3vh;">
+                        <button class="tableInfo-section-button" ng-show="tableEditMode == 1" ng-click="AddNewTableSection()">Create Section</button>
+                        <span ng-repeat="section in sectionArr">
+                            <div style="display:inline-block;margin:0 1vw;width:16vw;position:relative;" ng-class="{jiggle: tableEditMode}">
+                                <div ng-show='tableEditMode==true' style="position:absolute;z-index:1;font-size:5.5vmin;height:6vmin;width:6vmin;color:white;background-color:red;right:-8px;top:-11px;line-height:7vmin;text-align:center;border-radius:50%;" class="icon icon-right ion-ios-close-empty" ng-Click="deleteAllTablesAndSections(section.sectionId)"></div>
+                                <div ng-show='tableEditMode==true' style="position:absolute;font-size:3vmin;line-height:7vmin;text-align:center;height:6vmin;width:6vmin;color:white;background:blue;border-radius:10px;left:-4px;top:-15px;" class="icon-left ion-edit" ng-Click="OnEditSection(section.sectionId)"></div>
+                                <button class="tableInfo-section-button" ng-style="highlight==section.sectionId ? {background:'Red'} : {background:'Black'}" ng-click="OnSectionClick(section.sectionId)">{{section.sectionName}}</button>
+                            </div>
+                        </span>
+                    </ion-scroll>
+                </div>
+            </div>
+        </ion-side-tab>
+    
+        <ion-side-tab positive-bg style="border-radius: 10px;border-radius: 10px; width:10vw;background-color:rgba(8,8,8,0.9);" has-header='false' expand="tabs.tab4">
+            <ion-side-tab-handle width="60" height="100" toggle="ion-chevron-right ion-ios-home-outline" class="dark-bg stable" style="border-radius: 40px 0 0 40px; background-color:rgba(8,8,8,0.9);">
+                <i style="font-size:5vmin;" class="icon ion-ios-home-outline"></i>
+            </ion-side-tab-handle>
+            <div class="item" style="background-color:transparent;border:0px;width:60%;text-align:center;" ng-controller="shopNameChangeCtrl">
+                <div>
+                    <ion-radio ng-repeat="shop in shopNames" ng-model="selShopDB" ng-value="shop.dbName" ng-checked="true" ng-click="changeShopName(shop)">{{shop.name}}</ion-radio>
+                </div>
+            </div>
+        </ion-side-tab>
+    </ion-side-tabs>
+</ion-view>

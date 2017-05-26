@@ -1,0 +1,70 @@
+{
+
+"MenuItems" : [
+
+{
+"name": "Bill-Settings",
+"icon": "ion-ios-printer-outline",
+"state": "PrinterSetting"
+},
+{
+"name": "Payment-Settings",
+"icon": "ion-cash",
+"state": "PaymentSetting"
+},
+{
+"name": "Tax-Settings",
+"icon": "ion-settings",
+"state": "TaxSettings"
+},
+{
+"name": "Report-Setting",
+"icon": "ion-document",
+"state": "Reports"
+},{
+"name": "Bluetooth-Settings",
+"icon": "ion-bluetooth",
+"state": "bluetoothsettings"
+},
+{
+"name": "Change-Password",
+"icon": "ion-key",
+"state": "passwordChange"
+},
+{
+"name": "BillWise-Report",
+"icon": "ion-document-text",
+"state": "billWiseReport"
+},
+{
+"name": "Sales-Report",
+"icon": "ion-document-text",
+"state": "salesReport"
+},
+{
+"name": "ItemWise-Report",
+"icon": "ion-document-text",
+"state": "itemReport"
+},
+
+
+{
+"name": "Reprint-Bill",
+"icon": "ion-android-print",
+"state": "billdetails"
+},
+{
+"name": "Cancel-Bill",
+"icon": "ion-android-cancel",
+"state": "billdetails"
+},
+{
+"name": "Table Info",
+"icon": "ion-navicon-round",
+"state": "tableInfo"
+}
+
+
+]
+}
+

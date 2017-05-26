@@ -1,0 +1,45 @@
+<ion-view hide-nav-bar='true' cache-view="false">
+<ion-content style="text-align:center;" ng-controller="productReportCtrl">
+ <div>
+        <h2 style="text-align:center;"> Item Wise Report </h2>
+    </div>
+<label class="item item-input">
+  <span class="input-label" style="font-style:italic;font-size: 3vh;font-weight: bold;">Start</span>
+  <input type="date" ng-model="Dte.start">
+</label>
+<label class="item item-input" >
+  <span class="input-label" style="font-style:italic;font-size: 3vh;font-weight: bold;">End</span>
+  <input type="date" ng-model="Dte.end">
+</label>
+
+<div style="text-align:center;margin-top:2vh;">
+<button style="width:25vh;margin-right:2vh;" class='button button-dark' ng-click=save()>Get Report</button>
+     <button style="width:25vh;" class='button button-dark' ng-click="closeView()"> Close </button>
+<!--<button ion-button ng-click=save()>Get Report</button>-->
+</div>
+<div ng-if="showreport==true">
+<button style="width:25vh;margin:auto;" class='button button-dark' ng-click=saveReport()>Save Report</button>
+<!--<button ion-button ng-click=saveReport()>Save Report</button>-->
+<ion-list >
+
+<ion-item >
+<div class="row header" id="salesReportHeader">
+          <div class="col">Item Name</div>
+          <div class="col">Quantity</div>
+          <div class="col">Amount</div>
+        </div>
+</ion-item>
+<!--<ion-scroll direction="y" id="productsViewSlideBox" style="width:100%;height:90%;" scrollbar-x = false scrollbar-y= false>
+-->
+ <ion-item ng-repeat="product in productReport">      
+        <div class="row" >
+          <div class="col">{{product.itemName}}</div>
+          <div class="col">{{product. qtySold}}</div>
+          <div class="col">{{product.totalAmount}}</div>
+        </div>
+   </ion-item>
+<!--</ion-scroll> -->
+</ion-list>
+</div>
+</ion-content>
+</ion-view>

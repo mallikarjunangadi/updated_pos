@@ -1,0 +1,77 @@
+<ion-view  ng-controller="categoryCtrl" cache-view="false" has-header="false" hide-nav-bar="true">
+    <ion-content id="categoryContentDiv">
+    <div>
+        <h2 style="text-align:center;"> Add Category </h2>
+    </div>
+        
+            <div class="list">
+    
+                <label class="item item-input">
+                    <span class="input-label">Category Name :</span>
+                    <input type="text" name="catNameInput" limit-char limit="25"  ng-model="newCategory.categoryName" placeholder="Enter category Name" required></input>
+                    <!--<p style="color:red;" ng-show="categoryForm.catNameInput.$touched && categoryForm.catNameInput.$invalid">Required and length should be 0-20 characters</p>-->
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Category Description :</span>
+                    <textarea name="catDescInput" limit-char limit="50" ng-model="newCategory.categoryDescription" placeholder="Type..."></textarea>
+                    <!--<p style="color:red;" ng-show="categoryForm.catDescInput.$touched && categoryForm.catDescInput.$invalid">Required and length should be 0-20 characters</p>-->
+                </label>
+                <div>
+                    
+                    <button class="button button-dark"  ng-click="OnDone()">{{CategoryButtonText}}</button>
+                    <button class='button button-dark' ng-click="closeView()">Exit without update </button>
+   
+                 
+                 
+        <!--<p style="color:green;" ng-show="succesMessage">Category Added successfully</p> -->
+        <hr/>
+     <!--       <button ng-show = "CreateMode == 0" class="button button-block" ng-Click = "deleteAllProductsAndCat()">Delete Category</button>
+
+        <div>
+            <h3 style="text-align:center;">Edit Category</h3>
+            <label class="item item-input">
+                <span class="input-label">Category Id :</span>
+                <input type="text" name="categoryEdit" ng-model="searchCategory.categoryId" placeholder="Enter category Id"></input>
+            </label>
+            <div style="display:inline">
+                <a class="button button-positive" ng-click="editCategory()">Edit </a>
+                <a class="button button-assertive" ng-click="deleteCategory()">Delete</a>
+            </div>
+            <div>
+                <ion-list>
+                    <ion-item>
+                        <span style="margin:11%;">CategoryId</span>
+                        <span style="margin:9%;">CategoryName</span>
+                        <span style="margin:11%;">CategoryDesc</span>
+                    </ion-item>
+                </ion-list>
+                <ion-list>
+                    <ion-item ng-if="categoryObj.categoryId != 'favourite'" ng-repeat="categoryObj in categoryArr | filter:searchCategory:strict| limitTo:5" ng-click="editSelectedCategory(categoryObj)">
+                        <span style="margin:12%;">{{categoryObj.categoryId}}</span>
+                        <span style="margin:12%;">{{categoryObj.categoryName}}</span>
+                        <span style="margin:12%;">{{categoryObj.categoryDescription}}</span>
+                    </ion-item>
+                </ion-list>
+            </div>
+            <p style="color:red;" ng-show="selectCategoryWarningMsg" >Please select category from list...</p>
+            <div ng-show="showEditField">
+                <ion-item>
+                    <label class="item item-input">
+                        <span class="input-label">Category New Name :</span>
+                        <input type="text" ng-model="editedCategory.name" ng-focus="nameFocused()" placeholder="Enter category new name"></input>
+                    </label>
+                    <label class="item item-input">
+                        <span class="input-label">Category New Description :</span>
+                        <input type="text" ng-model="editedCategory.description" placeholder="Enter category new Description"></input>
+                    </label>
+                </ion-item>
+                <a class="button button-block" ng-click="saveEditedCategory()">Save</a>
+            </div>
+           <p style="color:red;" ng-show="newNameDescWarningMsg" >Please give new name and description...</p> 
+           <p style="color:green;" ng-show="newNameDescSuccessMsg" >Edited Successfully...</p>   
+           
+        </div> -->
+
+
+    </ion-content>
+</ion-view>

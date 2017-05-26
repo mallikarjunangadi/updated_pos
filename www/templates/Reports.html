@@ -1,0 +1,37 @@
+
+<ion-view view-title="Report" cache-view="false" hide-nav-bar='true'>
+
+<ion-content ng-controller="reportSettings">
+  <div>
+        <h2 style="text-align:center;"> Reports </h2>
+    </div>
+<ion-list>
+
+<form id="report">
+<ion-checkbox ng-model="reportObj.storeCloud">Store Reports On Colud:</ion-checkbox>
+<ion-checkbox  ng-model="reportObj.sendEmail">Send Email Report:</ion-checkbox>
+<ion-item ng-show="reportObj.sendEmail">
+<label class="item item-input">
+  <span class="input-label" >Email:</span>
+  <input type="text" ng-model="reportObj.emailAddress" ></input>
+</label>
+
+</ion-item>
+<ion-checkbox ng-model="reportObj.sendSMS">Send SMS Alert:</ion-checkbox>
+<ion-item ng-show="reportObj.sendSMS">
+<ion-checkbox ng-model="reportObj.smsLowStock">On Low Stock</ion-checkbox>
+<ion-checkbox ng-model="reportObj.smsDailyCollection">Daily Collection</ion-checkbox>
+<label class="item item-input">
+  <span class="input-label">Phone Number:</span>
+  <input type="text" ng-model="reportObj.smsPhoneNo"></input>
+</label>
+</ion-item>
+<div class="padding">
+  <!--<button type="submit" ng-click="saveReports()" class="button button-block button-dark" style="margin:auto;width:70%">Submit</button>-->
+   <button class='button button-dark' ng-click="saveReports()">Save </button>
+     <button class='button button-dark' ng-click="closeView()"> Close </button>
+  </div>
+  </form>
+</ion-list>
+</ion-content>
+</ion-view>

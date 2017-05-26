@@ -1,0 +1,51 @@
+<ion-view view-title="Edit Products" ng-controller="editProductsCtrl" cache-view="false">
+    <ion-nav-buttons side="right">
+        <a ng-show="showDeleteOnHold" style="color: white;float:right;position:absolute;right:0vh;" ng-click="cancelDelete()" class="button">Cancel</a>
+        <a ng-show="showDeleteOnHold" style="color: white;float:right;position:absolute;right:10vh;" ng-click="deleteSelectedProducts()" class="button button-icon icon ion-trash-a"></a>
+    </ion-nav-buttons>
+    <ion-content id="editProductContent">
+        <!--
+ <ion-list>
+  <ion-item>
+     <span class="editProHead" style="margin-right:8%;"><b>productId</b></span>
+     <span class="editProHead" style="margin-right:8%;"><b> productName</b></span>
+     <span class="editProHead" style="margin-right:8%;"><b> productUnitPrice</b></span>
+     <span class="editProHead" style="margin-right:8%;"><b> CategoryName</b></span>
+     <span class="editProHead" style="margin-right:8%;"><b> CategoryId</b></span>
+     <span class="editProHead"><b> Image</b></span>
+   </ion-item>
+  </ion-list> 
+  <ion-list>
+   <ion-item ng-repeat="product in Products">
+     <span style="margin-right:8%;">{{product.productId}}<span>
+     <span style="margin-right:8%;">{{product.name}}<span>  
+     <span style="margin-right:8%;">{{product.unitPrice}}<span>
+     <span style="margin-right:8%;">{{product.categoryName}}<span>
+     <span style="margin-right:8%;">{{product.categoryId}}<span>      
+     <img src="{{product.image}}" style="width:15vh;height:9vh;"></img>      
+   </ion-item>
+  </ion-list>
+  -->
+        <ion-slide-box show-pager="true" id="editProductSlide">
+            <ion-slide style="display:flex;width:100%;height:100%;flex-wrap:wrap;margin:1vh;">
+                <div on-hold="onEditProductHold()" class="card" style="width:25vh;height:20vh;border:1px solid black;" ng-repeat="product in Products">
+                    <div ng-show="showCheckMark" style="position:absolute;">
+                        <ion-checkbox ng-model="selectedValue" ng-click="selectedProduct(product.productId, selectedValue)"></ion-checkbox>
+                    </div>
+                    <div style="width:100%;height:100%;" ng-click="editProduct(product)">
+                        <div id="product-name" align="left">
+                            <p style="font-weight:bolder;text-transform: uppercase;padding:2vh;margin:auto;position:absolute;font-size:small;">{{product.name}}</p>
+                        </div>
+                        <div id="product-image" align="right">
+                            <img ng-src={{product.image}} style="padding:auto;margin:auto;height:100%;width:100%;"></img>
+                            <div id="product-stock"></div>
+                            <div id="product-price">
+                                <p style="font-weight:bolder;color:lightblue;">{{product.unitPrice}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+    </ion-content>
+</ion-view>

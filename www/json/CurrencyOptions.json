@@ -1,0 +1,47 @@
+{
+"CurrencyOptions" : [
+{
+"id" : 1,
+"name" : "Rupee",
+"symbol" : "₹"   
+},
+{
+"id" : 2,
+"name" : "Dollar",
+"symbol" : "$"
+},
+{
+"id" : 3,
+"name" : "Pound",
+"symbol" : "£"   
+},
+{
+"id" : 4,
+"name" : "Ringitt",
+"symbol" : "RM"   
+},
+{
+"id" : 5,
+"name" : "Euro",
+"symbol" : "€"   
+}
+],
+"PaymentMode" : [
+{
+   "id" : 1,
+   "name" : "Cash",
+   "desc" : "Cash Payment Mode"
+},
+{
+   "id" : 2,
+   "name" : "PayTM",
+   "desc" : "Paytm Payment mode"
+},
+{
+   "id" : 3,
+   "name" : "Visa",
+   "desc" : "Visa Debit or Credit Card"
+}
+]
+
+}

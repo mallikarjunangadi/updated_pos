@@ -1,0 +1,14 @@
+<ion-popover-view>
+ 
+       
+  
+    <ion-content>
+     <h2 class="title">Select tax Rate</h2>
+     <ion-list>
+       <ion-item ng-repeat="tax in TaxSettings1" ng-click="onTaxRateSelect(tax)">
+        <span>{{tax.name}}</span>
+        <span> {{tax.taxRate}}</span>
+       </ion-item>
+     </ion-list>
+    </ion-content>
+</ion-popover-view>

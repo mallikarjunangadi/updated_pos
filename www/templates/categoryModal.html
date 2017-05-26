@@ -1,0 +1,16 @@
+<ion-modal-view id="categaryModal">
+    <ion-content style="background-color:grey;">
+        <div class="list" style="background-color:transparent;">
+            <div class="item item-input-inset" style="background-color:transparent;">
+                <label class="item-input-wrapper">
+                    <input type="text" ng-model="newCategaryName" id="newCategoryAddField" placeholder="Add New Category"></input>
+                </label>
+                <button class="button button-small" ng-click="addNewCategary(newCategaryName)">Add</button>
+            </div>
+            <ion-item style="background-color:transparent;" ng-if="categoryObj.categoryName != 'Favourite'" ng-click="onCategorySelect(categoryObj)" ng-repeat="categoryObj in categoryArr" style="background-color:transparent;">
+                    <span>{{categoryObj.categoryName}} </span>
+                </ion-item>
+        </div>
+     
+    </ion-content>
+</ion-modal-view>

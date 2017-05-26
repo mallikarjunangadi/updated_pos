@@ -1,0 +1,30 @@
+<ion-view hide-nav-bar='true' cache-view="false">
+    <ion-content style="text-align:center;" ng-controller="SalesReportCtrl">
+        <div>
+            <h2 style="text-align:center;">Sales Report </h2>
+        </div>
+        <label class="item item-input">
+            <span class="input-label" style="font-style:italic;font-size: 3vh;font-weight: bold;">Start</span>
+            <input type="date" ng-model="Dte.start">
+        </label>
+        <label class="item item-input">
+            <span class="input-label" style="font-style:italic;font-size: 3vh;font-weight: bold;">End</span>
+            <input type="date" ng-model="Dte.end">
+        </label>
+        <div style="text-align:center;margin-top:2vh;">
+            <button style="width:25vh;margin-right:2vh;" class='button button-dark' ng-click=save()>Get Report</button>
+            <button style="width:25vh;" class='button button-dark' ng-click="closeView()">Close </button>
+            <!--<button ion-button ng-click=save()>Get Report</button>-->
+        </div>
+        <div ng-if="showreport==true" style="margin-top:3vh;">
+            <button style="width:25vh;margin:auto;" class='button button-dark' ng-click=onPrintSalesReport()>Print Report</button>
+            <!--<button ion-button ng-click=onPrintSalesReport()>Print Report</button>-->
+            <div class="card salesReport">
+                <p>Total Number of Bills: {{salesReport.totalBills}} </p>
+                <p>Total Amount: {{salesReport.totalPrice}} </p>
+                <p>Total Tax Amount: {{salesReport.taxAmount}} </p>
+                <p>Total Amount After Tax:{{salesReport.totalAmousnt}} </p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

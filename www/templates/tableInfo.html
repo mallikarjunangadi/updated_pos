@@ -1,0 +1,141 @@
+<!--
+    <ion-content scroll="false" style="margin-top:5vh;">
+
+    <div >
+      <h2>Draging directive fun</h2>
+        <div ng-draggable>
+      <img style="height:100px;"  src="http://fc00.deviantart.net/fs70/i/2012/135/a/7/tux_button_by_blacklite_teh_haxxor-d4zv3fv.png"/>
+      <span ng-draggable>Drag me!</span>
+      </div>
+      
+    </div>
+
+
+      <div id="tableInfoView">
+            <table class="tableInfolist" style="width:100%;font-size:2vmin;font-weight:bold;line-height:4.5vmin;color:black;">
+ -->
+<ion-view hide-nav-bar='true' cache-view="false" ng-controller="tableInfoCtrl">
+    <ion-content>
+        <button style="width:25vw;height:4vh;margin:1vh;" class='button button-dark' ng-click="closeView()">Close </button>
+        <div id="tableInfoView">
+            <table class="tableInfolist" style="width:100%;font-size:2vmin;font-weight:bold;line-height:4.5vmin;">
+                <tr ng-show='Mode == true'>
+                    <td style="background:transparent;">
+                        <div style="min-width:20%;height:20%;margin:1vh;" ng-click="AddNewTable()">
+                            <img ng-src="img/add-product.png" style="width:100%;"></img>
+                            <p style="text-align:center;">Add New Table</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr ng-repeat="table in tables" ng-if="$index%5==0" style="background:transparent;">
+                    <td style="background:transparent;">
+                        <div ng-class="[{jiggle: Mode}]" class="tableInfolistDiv">
+                            <div ng-show='Mode==true' class="icon-right ion-close-circled tableDelete" ng-Click="deleteTable(tables[$index].tableId)"></div>
+                            <div ng-show='Mode==true' class="icon-left ion-edit tableEdit" ng-Click="OnTableClick(tables[$index])"></div>
+                            <div style="width:15vw;max-height:24vh;" on-hold="productHold(); $event.stopPropagation()" ng-click="OnTableClick(tables[$index])">
+                                <!--     <img ng-src={{tables[$index].image}} alt="iamge" class="tableInfo-image"></img>  -->
+                                <div class="tableInfoNumber">
+                                    <p>{{tables[$index].tableNumber}} </p>
+                                </div>
+                                <div class="tableInfo-occupancy">
+                                    <p class="badge" style="background-color:green;color:white;">0</p>
+                                </div>
+                                <div class="tableInfo-capacity">
+                                    <p class="badge badge-stable">{{tables[$index].tableCapacity}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div ng-class="[{jiggle: Mode}]" class="tableInfolistDiv" ng-if="tables[$index+1]!=undefined">
+                            <div ng-show='Mode==true' class="icon-right ion-close-circled tableDelete" ng-Click="deleteTable(tables[$index+1].tableId)"></div>
+                            <div ng-show='Mode==true' class="icon-left ion-edit tableEdit" ng-Click="OnTableClick(tables[$index+1])"></div>
+                            <div style="width:15vw;max-height:25vh;" on-hold="productHold(); $event.stopPropagation()" ng-click="OnTableClick(tables[$index+1])">
+                                <!--     <img ng-src={{tables[$index+1].image}} class="tableInfo-image"></img> -->
+                                <div class="tableInfoNumber">
+                                    <p>{{tables[$index+1].tableNumber}} </p>
+                                </div>
+                                <div class="tableInfo-occupancy">
+                                    <p class="badge" style="background-color:green;color:white;">0</p>
+                                </div>
+                                <!--     <div class="tableInfo-desc">
+                                        <p>{{tables[$index+1].tableDescription}}</p>
+                                    </div>
+                           -->
+                                <div class="tableInfo-capacity">
+                                    <p class="badge badge-stable">{{tables[$index+1].tableCapacity}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div ng-class="[{jiggle: Mode}]" class="tableInfolistDiv" ng-if="tables[$index+2]!=undefined">
+                            <div ng-show='Mode==true' class="icon-right ion-close-circled tableDelete" ng-Click="deleteTable(tables[$index+2].tableId)"></div>
+                            <div ng-show='Mode==true' class="icon-left ion-edit tableEdit" ng-Click="OnTableClick(tables[$index+2])"></div>
+                            <div style="width:15vw;max-height:25vh;" on-hold="productHold(); $event.stopPropagation()" ng-click="OnTableClick(tables[$index+2])">
+                                <!--    <img ng-src={{tables[$index+2].image}} class="tableInfo-image"></img>  -->
+                                <div class="tableInfoNumber">
+                                    <p>{{tables[$index+2].tableNumber}} </p>
+                                </div>
+                                <div class="tableInfo-occupancy">
+                                    <p class="badge" style="background-color:green;color:white;">0</p>
+                                </div>
+                                <div class="tableInfo-capacity">
+                                    <p class="badge badge-stable">{{tables[$index+2].tableCapacity}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div ng-class="[{jiggle: Mode}]" class="tableInfolistDiv" ng-if="tables[$index+3]!=undefined">
+                            <div ng-show='Mode==true' class="icon-right ion-close-circled tableDelete" ng-Click="deleteTable(tables[$index+3].tableId)"></div>
+                            <div ng-show='Mode==true' class="icon-left ion-edit tableEdit" ng-Click="OnTableClick(tables[$index+3])"></div>
+                            <div style="width:15vw;max-height:25vh;" on-hold="productHold(); $event.stopPropagation()" ng-click="OnTableClick(tables[$index+3])">
+                                <!--     <img ng-src={{tables[$index+3].image}} class="tableInfo-image"></img>  -->
+                                <div class="tableInfoNumber">
+                                    <p>{{tables[$index+3].tableNumber}} </p>
+                                </div>
+                                <div class="tableInfo-occupancy">
+                                    <p class="badge" style="background-color:green;color:white;">0</p>
+                                </div>
+                                <div class="tableInfo-capacity">
+                                    <p class="badge badge-stable">{{tables[$index+3].tableCapacity}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div ng-class="[{jiggle: Mode}]" class="tableInfolistDiv" ng-if="tables[$index+4]!=undefined">
+                            <div ng-show='Mode==true' class="icon-right ion-close-circled tableDelete" ng-Click="deleteTable(tables[$index+4].tableId)"></div>
+                            <div ng-show='Mode==true' class="icon-left ion-edit tableEdit" ng-Click="OnTableClick(tables[$index+4])"></div>
+                            <div style="width:15vw;max-height:25vh;" on-hold="productHold(); $event.stopPropagation()" ng-click="OnTableClick(tables[$index+4])">
+                                <!--     <img ng-src={{tables[$index+3].image}} class="tableInfo-image"></img>  -->
+                                <div class="tableInfoNumber">
+                                    <p>{{tables[$index+4].tableNumber}} </p>
+                                </div>
+                                <div class="tableInfo-occupancy">
+                                    <p class="badge" style="background-color:green;color:white;">0</p>
+                                </div>
+                                <div class="tableInfo-capacity">
+                                    <p class="badge badge-stable">{{tables[$index+4].tableCapacity}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="tableInfo-section">
+                <ion-scroll direction="x" class="tableInfo-section-scroll" scrollbar-x=false scrollbar-y=false style="padding-top:3vh;">
+                    <button class="tableInfo-section-button" ng-show="Mode == 1" ng-click="AddNewTableSection()">Create Section</button>
+                    <span ng-repeat="section in sectionArr">
+                        <div style="display:inline-block;margin:0 1vw;width:16vw;position:relative;" ng-class="{jiggle: Mode}">
+                            <div ng-show='Mode==true' style="position:absolute;z-index:1;font-size:5.5vmin;height:7vmin;width:5vmin;color:red;right:-5px;top:-24px;" class="icon-right ion-close-circled" ng-Click="deleteAllTablesAndSections(section.sectionId)"></div>
+                            <div ng-show='Mode==true' style="position:absolute;font-size:3vmin;line-height:7vmin;text-align:center;height:6vmin;width:6vmin;color:white;background:blue;border-radius:10px;left:-4px;top:-15px;" class="icon-left ion-edit" ng-Click="OnEditSection(section.sectionId)"></div>
+                            <button class="tableInfo-section-button" ng-style="highlight==section.sectionId ? {background:'Red'} : {background:'Black'}" ng-click="OnSectionClick(section.sectionId)">{{section.sectionName}}</button>
+                        </div>
+                    </span>
+                </ion-scroll>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

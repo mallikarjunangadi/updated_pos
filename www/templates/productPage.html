@@ -1,0 +1,152 @@
+<tab-slide-box tab="0" ng-controller="productCtrl" style="background-color:black;" cache-view='false' class="has-header">
+    <div class="tsb-icons">
+        <div class="tsb-ic-wrp">
+            <a href="javascript:;" class="ion-images"></a>
+            <a href="javascript:;" class="ion-cash"></a>
+            <a href="javascript:;" class="ion-bag"></a>
+        </div>
+    </div>
+    <ion-slide-box selected="0" class="productAddSlide" show-pager="false" on-slide-changed="slideHasChanged($index)">
+        <ion-slide>
+            <h2 style="color:white;">Step 1 </h2>
+            <h3 style="color:white;">Add Product Basics</h3>
+            <div class="list" style="background-color:transparent;">
+                <label class="item item-input item-borderless" style="background-color:transparent;">
+                    <span class="input-label">Product Name :</span>
+                    <input type="text" ngModel="productNameInput" id="productName" limit-char limit="25" ng-model="newProduct.name" placeholder="Enter product name">
+                </label>
+                <label style="background-color:transparent;" class="item item-input item-borderless item-button-right" ng-click="openCategoryModal()">
+                    <span class="input-label">Category :</span>
+                    <input style="background-color:transparent;" type="text" id="Category" ng-model="newProduct.categoryName" readonly="readonly" placeholder="Slect product category">
+                    <button class="button button-dark">Select Category</button>
+                </label>
+                <label style="background-color:transparent;height:8vh" class="item item-input item-borderless">
+                    <span class="input-label">Image :</span>
+                    <input style="background-color:transparent;" type="text" ng-model="newProduct.image" id="Category" readonly="readonly" placeholder="Select product image">
+                    <button style="font-size:7vh;margin-right:3vh;color:black;background: transparent;border-color: transparent;" class="icon ion-ios-camera" on-touch="openCamera()"></button>
+                    <button style="font-size:6vh;margin-right:2vh;color:black;background: transparent;border-color: transparent;" class="icon ion-images" on-touch="openGallery()"></button>
+                </label>
+            </div>
+            <button class='button button-dark' ng-click='nextSlide()'>Next </button>
+        </ion-slide>
+        <ion-slide>
+            <h2 style="color:white;">Step 2 </h2>
+            <h3 style="color:white;">Add Product Costings</h3>
+            <label style="background-color:transparent;" class="item item-input item-borderless">
+                <span class="input-label">Selling Price :</span>
+                <input type="tel" name="productSpriceInput" id="productSellingPrice" maxlength="7" ng-model="newProduct.unitPrice" placeholder="Enter selling price"></input>
+            </label>
+            <label style="background-color:transparent;" class="item item-input item-borderless item-select">
+                <span class="input-label">Tax Rate(%):</span>
+                <input style="background-color:transparent;" type="text" ng-click="openTaxRatePopover($event)" id="taxRate" maxlength="10" placeholder="select TaxRate" ng-model="newProduct.taxRate" readonly="readonly"></input>
+            </label>
+            <label style="background-color:transparent;" class="item item-input item-borderless">
+                <span class="input-label">Buying Price :</span>
+                <input type="tel" name="productBpriceInput" id="buyingPrice" maxlength="7" ng-model="newProduct.actualPrice" placeholder="Enter buying price" required></input>
+            </label>
+            <label style="background-color:transparent;" class="item item-input item-borderless">
+                <span class="input-label">Discount (%):</span>
+                <input type="tel" id="discount" maxlength="5" ng-model="newProduct.discount" placeholder="Enter product discount">
+            </label>
+            <button class='button button-dark' ng-click='nextSlide()'>Next </button>
+        </ion-slide>
+        <ion-slide>
+            <h2 style="color:white;">Step 3 </h2>
+            <h3 style="color:white;">Add inventory</h3>
+            <label style="background-color:transparent;" class="item item-input item-borderless">
+                <span class="input-label">Favourite Product:</span>
+                <ion-toggle style="border:0px;min-height:6vh;background-color:transparent;" ng-model="newProduct.favourite" toggle-class="toggle-calm"></ion-toggle>
+            </label>
+            <label style="background-color:transparent;" class="item item-input item-borderless">
+                <span class="input-label">Product Unit :</span>
+                <ion-radio style="border-radius:10px;margin-right:1vw;" ng-style="{'background-color': 'black'}" ng-model="newProduct.unit" ng-value="'kgs'">Kgs</ion-radio>
+                <ion-radio style="border-radius:10px;margin-right:1vw;" ng-style="{'background-color': 'black'}" ng-model="newProduct.unit" ng-value="'litres'">Litres</ion-radio>
+                <ion-radio style="border-radius:10px;" ng-style="{'background-color': 'black'}" ng-model="newProduct.unit" ng-value="'pieces'">pieces</ion-radio>
+            </label>
+            <label style="background-color:transparent;" class="item item-input item-borderless">
+                <span class="input-label">Items in-stock :</span>
+                <input type="tel" ng-model="newProduct.inStock" maxlength="8" id="itemsStock" placeholder="Enter product in stock" required></input>
+            </label>
+            <button class='button button-dark' ng-click="addEditProduct()">Update Product </button>
+            <button class='button button-dark' ng-click="closeView()">Exit without update </button>
+        </ion-slide>
+</tab-slide-box>
+<!--<ion-view hide-nav-bar='true' ng-controller="productCtrl" cache-view="false">
+
+    <ion-content id="productContentDiv">
+
+    <ion-scroll direction="y" >
+    <div style="text-align:center">
+        <h2> Add New Product
+    </div>
+        <form name="productForm">
+
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Favourite Product:</span>
+                    <ion-toggle style="border:0px;min-height:6vh;" ng-model="newProduct.favourite" toggle-class="toggle-calm"></ion-toggle>
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Product Name :</span>
+                    <ion-input  name="productNameInput"id="productName" maxlength="25" ng-model="newProduct.name"></ion-input>
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Product Unit :</span>
+                    <ion-radio ng-model="newProduct.unit" ng-value="'kgs'">Kgs</ion-radio>
+                    <ion-radio ng-model="newProduct.unit" ng-value="'litres'">Litres</ion-radio>
+                    <ion-radio ng-model="newProduct.unit" ng-value="'pieces'">pieces</ion-radio>
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Selling Price :</span>
+                    <ion-input  name="productSpriceInput" id="productSellingPrice" maxlength="7" ng-model="newProduct.unitPrice"></ion-input>
+
+                   </label>
+
+                <label class="item item-input item-select">
+                    <span class="input-label">Tax Rate(%):</span>
+                    <ion-input  ng-click="openTaxRatePopover($event)" id="taxRate" maxlength="10" placeholder="select TaxRate" ng-model="newProduct.taxRate" readonly="readonly"></ion-input>
+
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Buying Price :</span>
+                    <ion-input  name="productBpriceInput" id="buyingPrice" maxlength="7"  ng-model="newProduct.actualPrice" required></ion-input>
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Items in-stock :</span>
+                    <ion-input type="number"  [(ngModel)]="newProduct.inStock" id="itemsStock"></ion-input>
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Discount (%):</span>
+                    <ion-input  id="discount" maxlength="5" ng-model="newProduct.discount">
+                </label>
+
+                <label class="item item-input item-button-right" ng-click="openCategoryModal()">
+                    <span class="input-label">Category :</span>
+                    <ion-input  id="Category" ng-model="newProduct.categoryName" readonly="readonly">
+                    <a class="button">Select Category</a>
+                </label>
+                <label class="item item-input" ng-click="openCamera()">
+                    <span class="input-label">Image :</span>
+                    <ion-input  ng-model="newProduct.image"  id ="Category" readonly="readonly">
+                    <a class="button">Camera</a>
+                </label>
+                <label class="item item-input" ng-click="openGallery()">
+                    <span class="input-label"></span>
+                    <a class="button">Gallery</a>
+                </label>
+            </div>
+            <button class="button button-block" ng-disabled=""  ng-click="addEditProduct()">{{ProductButtonText}}</button>
+       </form>
+
+        <button ng-show = "CreateMode == 0" class="button button-block" ng-Click = "deleteProduct(newProduct.productId)">Delete Product</button>
+        <p style="color:green;" ng-show="productSuccessMessage">Product Added successfully</p>
+   </ion-scroll>
+    </ion-content>
+</ion-view>
+-->

@@ -1,0 +1,21 @@
+<ion-view ng-controller="addEditSectionCtrl" hide-nav-bar="true">
+    <ion-content>
+       <div>
+            <h4 style="text-align:center;">Add Edit Section</h4>
+            <div class="list">
+                <label class="item item-input item-borderless">
+                    <span class="input-label">Section Name :</span>
+                    <input type="text" limit-char limit="15" ng-model="tableInfoSection.sectionName">
+                </label>
+                <label class="item item-input item-borderless">
+                    <span class="input-label">Section Description :</span>
+                    <input type="text" limit-char limit="25" ng-model="tableInfoSection.sectionDescription">
+                </label>
+            </div>
+            <div style="text-align:center;margin-top:2vh;">
+                <button style="width:25vh;margin-right:2vh;" class='button button-dark' ng-click="OnSave()">Save </button>
+                <button style="width:25vh;" class='button button-dark' ng-click="closeView()">Close </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,43 @@
+<ion-modal-view id="paymentModel">
+    <ion-content>
+        <ion-list>
+            <ion-item class="sam-input-item">
+                <span class="inputview" ng-model="quantity1">{{typedAmount}}
+      <a ng-click="closePaymentModal()"  id="quantity-close"class="icon-right ion-close-circled"></a>
+       </span>
+            </ion-item>
+        </ion-list>
+
+        <div class="button-bar sam-cust-bar">
+            <a ng-click="keyPressedAmount(1)" class="button button-block button-positive">1</a>
+            <a ng-click="keyPressedAmount(2)" class="button button-block button-positive">2</a>
+            <a ng-click="keyPressedAmount(3)" class="button button-block button-positive">3</a>
+        </div>
+        <div class="button-bar sam-cust-bar">
+            <a ng-click="keyPressedAmount(4)" class="button button-block button-positive">4</a>
+            <a ng-click="keyPressedAmount(5)" class="button button-block button-positive">5</a>
+            <a ng-click="keyPressedAmount(6)" class="button button-block button-positive">6</a>
+        </div>
+        <div class="button-bar sam-cust-bar">
+            <a ng-click="keyPressedAmount(7)" class="button button-block button-positive">7</a>
+            <a ng-click="keyPressedAmount(8)" class="button button-block button-positive">8</a>
+            <a ng-click="keyPressedAmount(9)" class="button button-block button-positive">9</a>
+        </div>
+        <div class="button-bar sam-cust-bar">
+            <a  ng-click="paidAmount()" class="button button-block button-assertive icon-left ion-checkmark"  ng-show="typedAmount>=totalChargeAmount"
+              ng-disabled="enterBtn">Enter</a>
+            <a class="button button-block button-stable" disabled>&nbsp;</a>
+            <a ng-click="keyPressedAmount(0)" class="button button-block button-positive">0</a>
+            <a ng-click="keyPressedAmount('.')" class="button button-block button-positive">.</a>
+
+        </div>
+        <div class="button-bar sam-cust-bar">
+
+            <a ng-click="keyPressedAmount(-3)" class="button button-block button-dark icon-left ion-backspace">Del</a>
+             <a ng-click="receipt()" class="button button-block button-assertive " id="receiptBtn" ng-disabled="receiptBtnShow">Reciept</a>
+            <a ng-click="closePaymentModal()" class="button button-block button-assertive icon-left ion-backspace">Close</a>
+            <a ng-click="keyPressedAmount(-2)" class="button button-block button-dark icon-left ion-backspace">ClearAll</a>
+
+        </div>
+    </ion-content>
+</ion-modal-view>

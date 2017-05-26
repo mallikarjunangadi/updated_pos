@@ -1,0 +1,59 @@
+<ion-view hide-nav-bar='true' cache-view="false">
+    <ion-content ng-controller="taxSetting" >
+    <div>
+        <h2 style="text-align:center;">Tax Settings </h2>
+    </div>
+        
+                <label class="item ">
+                    <span class="input-label">Name:</span>
+                    <input name="taxNme" id="taxNme"  style="color:black" ng-model="txSetting.name" type="text" limit-char limit="25"  required ></input>
+                    <!-- <p ng-if="tax!=undefined"> {{tax.name}}</p>-->
+
+                </label>
+                <label class="item ">
+                    <span class="input-label">Tax Rate:</span>
+                    <input type="tel" id="taxRate" style="color:black" step="any" name="taxRate" ng-model="txSetting.taxRate"  maxlength=4 required>
+                   <!-- <p ng-if="tax!=undefined"> {{tax.taxRate}}</p>-->
+                 </label>
+                <div class="padding">
+             
+            
+            <div class="row" style="margin:auto;">
+              
+             <button style="width:25vh;margin-right:2vh;" class='button button-dark' ng-click="saveTaxSetting(-1)">Addnew</button>
+             <button style="width:25vh;margin-right:2vh;" class='button button-dark' ng-click="closeView()"> Close </button>
+             
+
+             <button style="width:25vh;margin-right:2vh;" class='button button-dark' ng-if="addView==false"class="button button-block button-dark" ng-click="editTaxSetting(txSetting.id)">Edit</button>
+             <button style="width:25vh;margin-right:2vh;" class='button button-dark' ng-if="addView==false"class="button button-block button-dark" ng-click="deleteTaxSettings(txSetting.id)">Delete</button>
+            <!-- <button type="submit"  ng-click="saveTaxSetting(-1)" class="button button-block button-dark" style="margin:auto;width:50%">Addnew</button>
+             <button type="submit"   ng-if="addView==false"class="button button-block button-dark" ng-click="editTaxSetting(txSetting.id)">Edit</button>
+             <button type="submit"  ng-if="addView==false"class="button button-block button-dark"  ng-click="deleteTaxSettings(txSetting.id)">Delete</button>-->
+            </div>
+            
+            <!--<button type="submit"  ng-click="editTaxSetting(tax.id)" ng-if="tax.name!=undefined"class="button button-block button-dark" style="margin:auto;width:70%">Edit</button>
+             -->
+
+        </div>
+        <div class="padding" >
+  <!--  
+   <ion-scroll direction="y" id="productsViewSlideBox" style="width:100%;height:90%;" scrollbar-x = false scrollbar-y= false>
+  -->
+  <ion-list>
+   <ion-item>
+    <span><b>Tax Name</b></span>
+    <span style="float:right;"><b>Tax Rate</b></span>
+  </ion-item>
+
+  <ion-item ng-repeat="tax in TaxSettings" ng-click="view(tax)">
+  <span >{{tax.name}}</span>
+  <span style="float:right;">{{tax.taxRate}}</span>  
+  </ion-item>
+  
+   </ion-list>
+   <!--
+      </ion-scroll> -->
+  
+
+    </ion-content>
+</ion-view>

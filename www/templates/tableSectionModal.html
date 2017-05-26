@@ -1,0 +1,16 @@
+<ion-modal-view id="categaryModal">
+    <ion-content style="background-color:grey;">
+        <div class="list" style="background-color:transparent;">
+            <div class="item item-input-inset" style="background-color:transparent;">
+                <label class="item-input-wrapper">
+                    <input type="text" ng-model="newSectionName" id="newCategoryAddField" placeholder="Add New Section"></input>
+                </label>
+                <button class="button button-small" ng-click="addNewSection(newSectionName)">Add</button>
+            </div>
+            <ion-item style="background-color:transparent;" ng-click="onSectionSelect(sectionObj)" ng-repeat="sectionObj in sectionArr" style="background-color:transparent;">
+                    <span>{{sectionObj.sectionName}} </span>
+            </ion-item>
+        </div>
+     
+    </ion-content>
+</ion-modal-view>
